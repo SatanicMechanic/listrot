@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>List Health Audit — 2026-04-19</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 14px; line-height: 1.6; color: #24292f; background: #f6f8fa; padding: 24px; }
+  .container { max-width: 960px; margin: 0 auto; background: #fff; border: 1px solid #d0d7de; border-radius: 6px; padding: 32px; }
+  h1 { font-size: 20px; font-weight: 600; border-bottom: 1px solid #d0d7de; padding-bottom: 12px; margin-bottom: 20px; }
+  h2 { font-size: 16px; font-weight: 600; margin: 28px 0 10px; }
+  h3 { font-size: 14px; font-weight: 600; margin: 20px 0 8px; color: #57606a; }
+  p { margin: 8px 0; color: #57606a; font-size: 13px; }
+  hr { border: none; border-top: 1px solid #d0d7de; margin: 24px 0; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13px; }
+  th { background: #f6f8fa; font-weight: 600; text-align: left; padding: 8px 12px; border: 1px solid #d0d7de; }
+  td { padding: 7px 12px; border: 1px solid #d0d7de; vertical-align: top; }
+  tr:nth-child(even) td { background: #f6f8fa; }
+  code { font-family: ui-monospace, monospace; font-size: 12px; background: #f6f8fa; border: 1px solid #d0d7de; border-radius: 3px; padding: 1px 5px; }
+  .badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 10px; white-space: nowrap; }
+  .badge-red { background: #ffebe9; color: #cf222e; border: 1px solid #ff8182; }
+  .score-high { color: #cf222e; font-weight: 700; }
+  .score-mid { color: #9a6700; font-weight: 600; }
+  .score-low { color: #57606a; }
+  .signal { font-family: ui-monospace, monospace; font-size: 11px; display: inline-block; background: #ddf4ff; color: #0969da; border: 1px solid #54aeff80; border-radius: 3px; padding: 1px 5px; margin: 1px 2px 1px 0; }
+  .meta { font-size: 12px; color: #57606a; margin-top: 24px; padding-top: 12px; border-top: 1px solid #d0d7de; }
+  .callout { background: #ddf4ff; border: 1px solid #54aeff; border-radius: 6px; padding: 10px 14px; margin: 10px 0; font-size: 13px; color: #0550ae; }
+  a { color: #0969da; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .empty { color: #57606a; font-style: italic; padding: 10px 0; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1>[Auto] List Health Audit — 2026-04-19</h1>
+
+  <hr>
+
+  <h2>Hard Disqualifiers — remove these entries</h2>
+  <p>These entries have an objective, verifiable problem. No judgment needed.</p>
+  <table><thead><tr><th>Entry</th><th>Section</th><th>Reason</th></tr></thead><tbody><tr><td><a href="https://github.com/ipfire/ipfire-2.x">IPFire</a></td><td>Networking / Self-Hosted Network Security</td><td><span class="badge badge-red">deleted</span> Repo not found (404) — deleted, private, or moved</td></tr>
+<tr><td><a href="https://github.com/dave_m/clamtk">ClamTk</a></td><td>Operating Systems / Linux Defenses</td><td><span class="badge badge-red">deleted</span> Repo not found (404) — deleted, private, or moved</td></tr>
+<tr><td><a href="https://github.com/https:/">nostr</a></td><td>Social / Social Networks</td><td><span class="badge badge-red">deleted</span> Repo not found (404) — deleted, private, or moved</td></tr>
+<tr><td><a href="https://github.com/FilenCloudDienste/filen-cli.">FileN</a></td><td>Productivity / Encrypted Cloud Storage</td><td><span class="badge badge-red">deleted</span> Repo not found (404) — deleted, private, or moved</td></tr></tbody></table>
+
+  <hr>
+
+  <h2>Soft Candidates — review and decide</h2>
+
+  <h3>How to interpret</h3>
+  <table>
+    <thead><tr><th>Score</th><th>Signals</th><th>Suggested action</th></tr></thead>
+    <tbody>
+      <tr><td>3</td><td>Push stale only</td><td>Check if the project is intentionally "done" — stable software may not need commits. If clearly abandoned, remove.</td></tr>
+      <tr><td>4–5</td><td>Multiple staleness signals</td><td>Strong indication of abandonment. Remove unless you can verify active maintenance.</td></tr>
+      <tr><td>6+</td><td>All signals firing</td><td>Remove.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong>Signal key:</strong>
+    <code>archived</code> repo is archived (+4) ·
+    <code>push_very_stale</code> no commit in &gt;730d (+3) ·
+    <code>push_stale</code> no commit in &gt;365d (+1) ·
+    <code>release_stale</code> no release in &gt;2yr (+1) ·
+    <code>dep_cve_no_fix</code> dependency CVE with no fix available, &gt;90d old (+2)
+  </div>
+
+  <table><thead><tr><th>Entry</th><th>Section</th><th>Score</th><th>Signals</th></tr></thead><tbody><tr><td><a href="https://github.com/SimonBrazell/privacy-redirect">Privacy Redirect</a></td><td>Security Tools / Browser Extensions</td><td class="score-high">10</td><td><span class="signal">archived</span><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span><span class="signal">push_very_stale</span></td></tr>
+<tr><td><a href="https://github.com/M66B/XPrivacyLua">XPrivacyLua</a></td><td>Security Tools / Mobile Apps</td><td class="score-high">8</td><td><span class="signal">archived</span><span class="signal">push_very_stale</span><span class="signal">release_stale</span></td></tr>
+<tr><td><a href="https://github.com/nsacyber/Windows-Secure-Host-Baseline">Windows Secure Baseline</a></td><td>Operating Systems / Windows Defences</td><td class="score-high">7</td><td><span class="signal">archived</span><span class="signal">push_very_stale</span></td></tr>
+<tr><td><a href="https://github.com/forwardemail/free-email-forwarding">Forward Email</a></td><td>Communication / Encrypted Email</td><td class="score-high">6</td><td><span class="signal">archived</span><span class="signal">push_stale</span><span class="signal">release_stale</span></td></tr>
+<tr><td><a href="https://github.com/mozfreddyb/webext-firstpartyisolation">First Party Isolation</a></td><td>Security Tools / Browser Extensions</td><td class="score-high">6</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span><span class="signal">push_very_stale</span></td></tr>
+<tr><td><a href="https://github.com/matrix-org/dendrite">Matrix</a></td><td>Communication / Encrypted Messaging</td><td class="score-mid">5</td><td><span class="signal">archived</span><span class="signal">push_stale</span></td></tr>
+<tr><td><a href="https://github.com/Divested-Mobile/DivestOS-Build">DivestOS</a></td><td>Operating Systems / Mobile Operating Systems</td><td class="score-mid">5</td><td><span class="signal">archived</span><span class="signal">push_stale</span></td></tr>
+<tr><td><a href="https://github.com/ProtonMail/WebClients">ProtonMail</a></td><td>Communication / Encrypted Email</td><td class="score-mid">4</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span><span class="signal">release_stale</span></td></tr>
+<tr><td><a href="https://github.com/claustromaniac/poop">Privacy-Oriented Origin Policy</a></td><td>Security Tools / Browser Extensions</td><td class="score-mid">4</td><td><span class="signal">push_very_stale</span><span class="signal">release_stale</span></td></tr>
+<tr><td><a href="https://github.com/politiwatch/privacyspy">PrivacySpy</a></td><td>Security Tools / Browser Extensions</td><td class="score-mid">4</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span><span class="signal">push_stale</span></td></tr>
+<tr><td><a href="https://github.com/claustromaniac/httpz">HTTPZ</a></td><td>Security Tools / Browser Extensions</td><td class="score-mid">4</td><td><span class="signal">push_very_stale</span><span class="signal">release_stale</span></td></tr>
+<tr><td><a href="https://github.com/blokadaorg/blokada">Blokada</a></td><td>Security Tools / Mobile Apps</td><td class="score-mid">4</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span><span class="signal">release_stale</span></td></tr>
+<tr><td><a href="https://github.com/wesaphzt/privatelock">PrivateLock</a></td><td>Security Tools / Mobile Apps</td><td class="score-mid">4</td><td><span class="signal">push_very_stale</span><span class="signal">release_stale</span></td></tr>
+<tr><td><a href="https://github.com/s-s/dnscloak">DNS Cloak</a></td><td>Networking / DNS Clients</td><td class="score-mid">4</td><td><span class="signal">dep_cve_upgrade</span><span class="signal">push_very_stale</span></td></tr>
+<tr><td><a href="https://github.com/nextcloud/calendar">Nextcloud Calendar</a></td><td>Productivity / Calendar</td><td class="score-mid">4</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span><span class="signal">release_stale</span></td></tr>
+<tr><td><a href="https://github.com/xbrowsersync/app">XBrowserSync</a></td><td>Productivity / Browser Sync</td><td class="score-mid">4</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span><span class="signal">release_stale</span></td></tr>
+<tr><td><a href="https://github.com/FlowCrypt/flowcrypt-browser">FlowCrypt</a></td><td>Utilities / PGP Managers</td><td class="score-mid">4</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span><span class="signal">release_stale</span></td></tr>
+<tr><td><a href="https://github.com/szTheory/exifcleaner">ExifCleaner</a></td><td>Utilities / Metadata Removal</td><td class="score-mid">4</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span><span class="signal">release_stale</span></td></tr>
+<tr><td><a href="https://github.com/bitwarden/server">Bitwarden</a></td><td>Essentials / Password Managers</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/lesspass/lesspass">LessPass</a></td><td>Essentials / Password Managers</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/lanedirt/aliasvault">AliasVault</a></td><td>Essentials / Password Managers</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/twofas/2fas-server">2FAS</a></td><td>Essentials / 2-Factor Authentication</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/Authenticator-Extension/Authenticator">Authenticator CC</a></td><td>Essentials / 2-Factor Authentication</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/ente-io/ente">Ente Auth</a></td><td>Essentials / 2-Factor Authentication</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/savoirfairelinux/jami-project">Jami</a></td><td>Communication / P2P Messaging</td><td class="score-low">3</td><td><span class="signal">push_very_stale</span></td></tr>
+<tr><td><a href="https://github.com/tutao/tutanota">Tuta</a></td><td>Communication / Encrypted Email</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/the-djmaze/snappymail">SnappyMail</a></td><td>Communication / Email Clients</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/roundcube/roundcubemail">RoundCube</a></td><td>Communication / Email Clients</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/anonaddy/anonaddy">Addy</a></td><td>Communication / Mail Forwarding</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/mozilla/fx-private-relay">Firefox Private Relay</a></td><td>Communication / Mail Forwarding</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/mikecardwell/email-privacy-tester">Email Privacy Tester</a></td><td>Communication / Email Security Tools</td><td class="score-low">3</td><td><span class="signal">push_very_stale</span></td></tr>
+<tr><td><a href="https://github.com/lieser/dkim_verifier">DKIM Verifier</a></td><td>Communication / Email Security Tools</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/rinzlerch/user-encryption-wrapper">Crypton.sh</a></td><td>Communication / Virtual Phone Numbers</td><td class="score-low">3</td><td><span class="signal">push_very_stale</span></td></tr>
+<tr><td><a href="https://github.com/RocketChat/Rocket.Chat">Rocket.Chat</a></td><td>Communication / Team Collaboration</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/element-hq/element-web">Element</a></td><td>Communication / Team Collaboration</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/mattermost/mattermost">Mattermost</a></td><td>Communication / Team Collaboration</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/EFForg/privacybadger">Privacy Badger</a></td><td>Security Tools / Browser Extensions</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/mozilla/multi-account-containers">Firefox Multi-Account Containers</a></td><td>Security Tools / Browser Extensions</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/duckduckgo/duckduckgo-privacy-extension">Privacy Essentials</a></td><td>Security Tools / Browser Extensions</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/dessant/web-archives">Web Archives</a></td><td>Security Tools / Browser Extensions</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/translate-tools/linguist">Linguist</a></td><td>Security Tools / Browser Extensions</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/srlabs/snoopsnitch">SnoopSnitch</a></td><td>Security Tools / Mobile Apps</td><td class="score-low">3</td><td><span class="signal">push_very_stale</span></td></tr>
+<tr><td><a href="https://github.com/EFForg/cover-your-tracks">Panopticlick</a></td><td>Security Tools / Online Tools</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/ivpn/desktop-app">IVPN</a></td><td>Networking / Virtual Private Networks</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/firezone/firezone">Firezone</a></td><td>Networking / Self-Hosted Network Security</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/torproject/tor">Tor</a></td><td>Networking / Anonymity Networks</td><td class="score-low">3</td><td><span class="signal">push_very_stale</span></td></tr>
+<tr><td><a href="https://github.com/Ch4t4r/Nebulo">Nebulo</a></td><td>Networking / DNS Clients</td><td class="score-low">3</td><td><span class="signal">push_very_stale</span></td></tr>
+<tr><td><a href="https://github.com/mirror/dd-wrt">DD-WRT</a></td><td>Networking / Router Firmware</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/standardnotes/app">Standard Notes</a></td><td>Productivity / Digital Notes</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/turtl/desktop">Turtle</a></td><td>Productivity / Digital Notes</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/logseq/logseq">Logseq</a></td><td>Productivity / Digital Notes</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/obsidianmd/obsidian-releases">Obsidian</a></td><td>Productivity / Digital Notes</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/toeverything/AFFiNE">AFFiNE</a></td><td>Productivity / Digital Notes</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/johannesjo/super-productivity">Super Productivity</a></td><td>Productivity / Task Management</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/nextcloud/server">NextCloud</a></td><td>Productivity / Cloud Productivity Suites</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/go-vikunja/vikunja">Vikunja</a></td><td>Productivity / Cloud Productivity Suites</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/HemmeligOrg/Hemmelig.app">Hemmelig.app</a></td><td>Productivity / Secret Sharing</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/osbytes/crypt.fyi">crypt.fyi</a></td><td>Productivity / Secret Sharing</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/marcelklehr/floccus">Floccus</a></td><td>Productivity / Browser Sync</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/go-shiori/shiori">Shiori</a></td><td>Productivity / Browser Sync</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/jitsi/jitsi-meet">Jitsi</a></td><td>Productivity / Secure Conference Calls</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/mailvelope/mailvelope">Mailvelope</a></td><td>Utilities / PGP Managers</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/ImageOptim/ImageOptim">ImageOptim</a></td><td>Utilities / Metadata Removal</td><td class="score-low">3</td><td><span class="signal">push_very_stale</span></td></tr>
+<tr><td><a href="https://github.com/crazy-max/WindowsSpyBlocker">Windows Spy Blocker</a></td><td>Operating Systems / Windows Defences</td><td class="score-low">3</td><td><span class="signal">dep_cve_upgrade</span><span class="signal">push_stale</span><span class="signal">release_stale</span></td></tr>
+<tr><td><a href="https://github.com/gladysassistant/gladys">Gladys Assistant</a></td><td>Smart Home & IoT / Smart Home</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/trezor/trezor-firmware">Trezor</a></td><td>Finance / Crypto Wallets</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/spesmilo/electrum">Electrum</a></td><td>Finance / Crypto Wallets</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/digitalbitbox/bitbox-wallet-app">BitBox02</a></td><td>Finance / Crypto Wallets</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/RoboSats/robosats">RoboSats</a></td><td>Finance / Crypto Exchanges</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/firefly-iii/firefly-iii">Firefly III</a></td><td>Finance / Secure Budgeting</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/actualbudget/actual">Actual</a></td><td>Finance / Secure Budgeting</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/discourse/discourse">Discourse</a></td><td>Social / Social Networks</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/mastodon/mastodon">Mastodon</a></td><td>Social / Social Networks</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/LemmyNet/lemmy">Lemmy</a></td><td>Social / Social Networks</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/writeas/writefreely">Write Freely</a></td><td>Social / Blogging Platforms</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/picosh/pico">Pico</a></td><td>Social / Blogging Platforms</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/redlib-org/redlib">Redlib</a></td><td>Social / Proxy Sites</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/inkscape/inkscape">InkScape</a></td><td>Creativity / Image Editors</td><td class="score-low">3</td><td><span class="signal">push_very_stale</span></td></tr>
+<tr><td><a href="https://github.com/cinelerra-gg/cinelerra-gg">Cinelerra GG Infinity</a></td><td>Creativity / Video Editors</td><td class="score-low">3</td><td><span class="signal">push_very_stale</span></td></tr>
+<tr><td><a href="https://github.com/simple-login/app">SimpleLogin</a></td><td>Communication / Mail Forwarding</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/Cisco-Talos/clamav">ClamAV</a></td><td>Operating Systems / Anti-Malware</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/go-gitea/gitea">Gitea</a></td><td>Development / Code Hosting</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr>
+<tr><td><a href="https://github.com/just-the-docs/just-the-docs">Tiny RSS</a></td><td>Social / News Readers</td><td class="score-low">3</td><td><span class="signal">dep_cve_no_fix</span><span class="signal">dep_cve_upgrade</span></td></tr></tbody></table>
+
+  <hr>
+
+  <h2>Manual Review Queue</h2>
+
+  <h3>Dead or Unreachable URLs</h3>
+  <p>403/429 responses (bot-blocking) are excluded — those sites are up.</p>
+  <table><thead><tr><th>Entry</th><th>URL</th><th>Reason</th></tr></thead><tbody><tr><td>Startpage</td><td><a href="https://www.startpage.com">https://www.startpage.com</a></td><td>unreachable</td></tr>
+<tr><td>Bouncer</td><td><a href="https://play.google.com/store/apps/details?id=com.samruston.permission">https://play.google.com/store/apps/details?id=com.samruston.permission</a></td><td>HTTP 404</td></tr>
+<tr><td>Secure Task</td><td><a href="https://play.google.com/store/apps/details?id=com.balda.securetask">https://play.google.com/store/apps/details?id=com.balda.securetask</a></td><td>HTTP 404</td></tr>
+<tr><td>1.1.1.1</td><td><a href="https://1.1.1.1/">https://1.1.1.1/</a></td><td>HTTP 404</td></tr>
+<tr><td>SomeoneWhoCares/ Hosts</td><td><a href="https://someonewhocares.org/hosts">https://someonewhocares.org/hosts</a></td><td>unreachable</td></tr>
+<tr><td>FileSend</td><td><a href="https://filesend.standardnotes.org">https://filesend.standardnotes.org</a></td><td>unreachable</td></tr>
+<tr><td>Xen Project</td><td><a href="https://xenproject.org">https://xenproject.org</a></td><td>unreachable</td></tr>
+<tr><td>RKill</td><td><a href="https://www.bleepingcomputer.com/download/rkill">https://www.bleepingcomputer.com/download/rkill</a></td><td>HTTP 404</td></tr>
+<tr><td>DTube</td><td><a href="https://d.tube">https://d.tube</a></td><td>unreachable</td></tr></tbody></table>
+
+  <h3>Repos — Dependency Data Unavailable</h3>
+  <p>78 entries had no detectable dependency ecosystem. Dependency CVE scanning was skipped; all other signals still applied.</p>
+
+  <div class="meta">Skipped (no ecosystem): 78 · Skipped (duplicate): 15 · Passed: 258</div>
+
+</div>
+</body>
+</html>

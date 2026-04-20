@@ -1,0 +1,66 @@
+name: 'listrot'
+description: 'Audit curated lists (markdown or YAML) for unmaintained, vulnerable, or dead entries'
+author: 'listrot contributors'
+
+branding:
+  icon: 'alert-circle'
+  color: 'orange'
+
+inputs:
+  github-token:
+    description: 'GitHub token for API access and issue creation'
+    required: true
+  gitlab-token:
+    description: 'GitLab personal access token (read_api scope). Required for private GitLab repos; public repos work without it but may be rate-limited.'
+    required: false
+    default: ''
+  list-file:
+    description: 'Path to the list file to audit (.md, .yml, or .yaml)'
+    required: false
+    default: 'README.md'
+  stale-commit-days:
+    description: 'Days since last push to flag a repo as stale'
+    required: false
+    default: '730'
+  stale-dep-days:
+    description: 'Days since last dependency update to flag as stale'
+    required: false
+    default: '180'
+  score-threshold:
+    description: 'Minimum soft score to surface an entry in the audit report'
+    required: false
+    default: '3'
+  issue-label:
+    description: 'Label applied to both issue types'
+    required: false
+    default: 'list-health-audit'
+  create-issue:
+    description: 'Toggle issue creation; false = JSON output only'
+    required: false
+    default: 'true'
+  output-file:
+    description: 'Optional path to write JSON results'
+    required: false
+    default: ''
+
+outputs:
+  hard-count:
+    description: 'Number of hard-flagged entries (deleted repos, dead URLs)'
+  soft-count:
+    description: 'Number of soft-flagged entries above the score threshold'
+  dead-count:
+    description: 'Number of dead or unreachable URLs'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    GITHUB_TOKEN: ${{ inputs.github-token }}
+    GITLAB_TOKEN: ${{ inputs.gitlab-token }}
+    MARKDOWN_FILE: ${{ inputs.list-file }}
+    STALE_COMMIT_DAYS: ${{ inputs.stale-commit-days }}
+    STALE_DEP_DAYS: ${{ inputs.stale-dep-days }}
+    SCORE_THRESHOLD: ${{ inputs.score-threshold }}
+    ISSUE_LABEL: ${{ inputs.issue-label }}
+    CREATE_ISSUE: ${{ inputs.create-issue }}
+    OUTPUT_FILE: ${{ inputs.output-file }}

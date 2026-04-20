@@ -1,0 +1,24 @@
+name: List Health Audit
+on:
+  schedule:
+    - cron: '0 9 1 */3 *'  # quarterly: Jan/Apr/Jul/Oct
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - id: listrot
+        uses: SatanicMechanic/listrot@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          # gitlab-token: ${{ secrets.GITLAB_TOKEN }}  # optional; needed for private GitLab repos
+          list-file: README.md
+      - name: Fail if hard flags found
+        if: steps.listrot.outputs.hard-count != '0'
+        run: |
+          echo "::warning::listrot found ${{ steps.listrot.outputs.hard-count }} hard-flagged entries. Review the audit issue."
