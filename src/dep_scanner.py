@@ -8,12 +8,14 @@ OSV_BATCH_URL = "https://api.osv.dev/v1/querybatch"
 OSV_BATCH_SIZE = 500
 
 PURL_ECOSYSTEM_MAP = {
-    "npm":     "npm",
-    "pypi":    "PyPI",
-    "golang":  "Go",
-    "cargo":   "crates.io",
-    "gem":     "RubyGems",
-    "maven":   "Maven",
+    "npm":      "npm",
+    "pypi":     "PyPI",
+    "golang":   "Go",
+    "cargo":    "crates.io",
+    "gem":      "RubyGems",
+    "maven":    "Maven",
+    "composer": "Packagist",
+    "nuget":    "NuGet",
 }
 
 
@@ -30,8 +32,10 @@ def _parse_purl(purl: str) -> Optional[tuple[str, str, str]]:
         # "groupId/artifactId" → "groupId:artifactId" for OSV
         parts = path.split("/", 1)
         name = ":".join(parts) if len(parts) == 2 else path
-    elif pkg_type == "golang":
-        name = path  # full module path, e.g. github.com/gin-gonic/gin
+    elif pkg_type in ("golang", "composer"):
+        name = path  # keep full path: Go module paths, Composer "vendor/package"
+    elif pkg_type == "npm" and path.startswith("@"):
+        name = path  # scoped npm: "@scope/name" — stripping scope queries the wrong package
     else:
         name = path.split("/")[-1]
     return ecosystem, name, version

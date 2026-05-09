@@ -74,8 +74,17 @@ def test_parse_maven():
     result = _parse_purl("pkg:maven/org.apache.commons/commons-lang3@3.12.0")
     assert result == ("Maven", "org.apache.commons:commons-lang3", "3.12.0")
 
+def test_parse_npm_scoped():
+    assert _parse_purl("pkg:npm/%40babel%2Ftraverse@7.23.1") == ("npm", "@babel/traverse", "7.23.1")
+
+def test_parse_composer():
+    assert _parse_purl("pkg:composer/symfony/console@5.4.0") == ("Packagist", "symfony/console", "5.4.0")
+
+def test_parse_nuget():
+    assert _parse_purl("pkg:nuget/Newtonsoft.Json@13.0.1") == ("NuGet", "Newtonsoft.Json", "13.0.1")
+
 def test_parse_unknown_type_returns_none():
-    assert _parse_purl("pkg:nuget/Newtonsoft.Json@13.0.1") is None
+    assert _parse_purl("pkg:apk/some-lib@1.0") is None
 
 def test_parse_malformed_returns_none():
     assert _parse_purl("not-a-purl") is None
@@ -95,7 +104,7 @@ def test_sbom_to_queries_extracts_packages():
     assert queries[1] == {"package": {"name": "requests", "ecosystem": "PyPI"}, "version": "2.28.0"}
 
 def test_sbom_to_queries_skips_unknown_ecosystems():
-    sbom = make_sbom("pkg:nuget/Foo@1.0", "pkg:npm/bar@2.0")
+    sbom = make_sbom("pkg:apk/some-lib@1.0", "pkg:npm/bar@2.0")
     queries = _sbom_to_queries(sbom)
     assert len(queries) == 1
     assert queries[0]["package"]["name"] == "bar"
