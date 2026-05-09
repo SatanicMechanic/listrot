@@ -1,6 +1,6 @@
 # listrot
 
-> **Beta** — v0.1.2. Expect rough edges. Findings should be spot-checked before acting on them. This was authored entirely with AI — review carefully before trusting actions from internet randos.
+> **Beta** — v0.1.4. Expect rough edges. Findings should be spot-checked before acting on them. This was authored entirely with AI — review carefully before trusting actions from internet randos.
 
 A GitHub Action that audits curated markdown lists for abandoned, unmaintained, or vulnerable entries.
 
@@ -31,7 +31,7 @@ Both patterns are handled correctly. For entries with multiple links on one line
 ## Usage
 
 ```yaml
-- uses: SatanicMechanic/listrot@v1
+- uses: SatanicMechanic/listrot@v0.1.4
   with:
     github-token: ${{ secrets.GITHUB_TOKEN }}
     list-file: README.md
