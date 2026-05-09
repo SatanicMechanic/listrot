@@ -2,6 +2,12 @@ from datetime import date
 from typing import Optional
 from github_client import GitHubClient
 
+
+def _md_escape(s: str) -> str:
+    if not s:
+        return s
+    return s.replace('|', r'\|').replace('\r', '').replace('\n', ' ')
+
 AUTO_TITLE_PREFIX = "[Auto] List Health Audit"
 MANUAL_TITLE = "[Auto] Manual Review Queue"
 
@@ -37,7 +43,7 @@ def _build_auto_body(hard_flagged: list[dict], soft_flagged: list[dict],
         lines.append("| Entry | Section | Reason |")
         lines.append("|---|---|---|")
         for item in hard_flagged:
-            lines.append(f"| [{item['name']}]({item['url']}) | {item['section'] or '—'} | {item['reason']} |")
+            lines.append(f"| [{_md_escape(item['name'])}]({item['url']}) | {_md_escape(item['section'] or '—')} | {_md_escape(item['reason'])} |")
     else:
         lines.append("_None found._")
 
@@ -54,7 +60,7 @@ def _build_auto_body(hard_flagged: list[dict], soft_flagged: list[dict],
         for item in soft_flagged:
             signals = ", ".join(item.get("signals", []))
             lines.append(
-                f"| [{item['name']}]({item['url']}) | {item['section'] or '—'} "
+                f"| [{_md_escape(item['name'])}]({item['url']}) | {_md_escape(item['section'] or '—')} "
                 f"| {item['score']} | {signals} |"
             )
     else:
@@ -81,7 +87,7 @@ def _build_manual_body(dead_urls: list[dict], no_ecosystem: list[dict],
         lines.append("|---|---|---|")
         for item in cve_entries:
             ids = ", ".join(f"[{v}](https://osv.dev/vulnerability/{v})" for v in item.get("cve_ids", []))
-            lines.append(f"| [{item['name']}]({item['url']}) | {item['section'] or '—'} | {ids} |")
+            lines.append(f"| [{_md_escape(item['name'])}]({item['url']}) | {_md_escape(item['section'] or '—')} | {ids} |")
     else:
         lines.append("_None._")
 
@@ -91,8 +97,8 @@ def _build_manual_body(dead_urls: list[dict], no_ecosystem: list[dict],
         lines.append("|---|---|---|---|")
         for item in dead_urls:
             lines.append(
-                f"| {item['name']} | {item['section'] or '—'} "
-                f"| {item['url']} | {item.get('reason', '')} |"
+                f"| {_md_escape(item['name'])} | {_md_escape(item['section'] or '—')} "
+                f"| {item['url']} | {_md_escape(item.get('reason', ''))} |"
             )
     else:
         lines.append("_None._")
@@ -102,7 +108,7 @@ def _build_manual_body(dead_urls: list[dict], no_ecosystem: list[dict],
         lines.append("| Entry | Section | URL |")
         lines.append("|---|---|---|")
         for item in no_ecosystem:
-            lines.append(f"| [{item['name']}]({item['url']}) | {item['section'] or '—'} | {item['url']} |")
+            lines.append(f"| [{_md_escape(item['name'])}]({item['url']}) | {_md_escape(item['section'] or '—')} | {item['url']} |")
     else:
         lines.append("_None._")
 
@@ -112,8 +118,8 @@ def _build_manual_body(dead_urls: list[dict], no_ecosystem: list[dict],
         lines.append("|---|---|---|---|")
         for item in carried_forward:
             lines.append(
-                f"| [{item['name']}]({item['url']}) | {item['section'] or '—'} "
-                f"| {item['url']} | {item.get('note', '')} |"
+                f"| [{_md_escape(item['name'])}]({item['url']}) | {_md_escape(item['section'] or '—')} "
+                f"| {item['url']} | {_md_escape(item.get('note', ''))} |"
             )
     else:
         lines.append("_None._")

@@ -19,7 +19,10 @@ class GitHubClient:
         for attempt in range(5):
             resp = self.session.get(url, params=params, timeout=20)
             if resp.status_code in (429, 403):
-                retry_after = int(resp.headers.get("Retry-After", backoff * 2))
+                try:
+                    retry_after = min(int(resp.headers.get("Retry-After", backoff * 2)), 120)
+                except (ValueError, TypeError):
+                    retry_after = backoff * 2
                 time.sleep(retry_after)
                 backoff = min(backoff * 2, 60)
                 continue

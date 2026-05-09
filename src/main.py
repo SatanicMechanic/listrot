@@ -26,10 +26,14 @@ def _write_github_output(key: str, value: str) -> None:
             f.write(f"{key}={value}\n")
 
 
+def _sanitize_annotation(s: str) -> str:
+    return s.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+
+
 def _annotate(level: str, title: str, message: str) -> None:
     """Emit a GitHub Actions workflow annotation (no-op outside Actions)."""
     if os.environ.get("GITHUB_ACTIONS"):
-        print(f"::{level} title={title}::{message}")
+        print(f"::{level} title={_sanitize_annotation(title)}::{_sanitize_annotation(message)}")
 
 
 def parse_only(list_file: str) -> None:
