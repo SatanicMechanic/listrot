@@ -30,8 +30,8 @@ class Entry:
 
 def _is_badge_url(url: str) -> bool:
     try:
-        host = urlparse(url).netloc.lstrip('www.')
-        return host in BADGE_DOMAINS or url.startswith('https://img.shields.io')
+        host = urlparse(url).netloc.removeprefix('www.')
+        return host in BADGE_DOMAINS
     except Exception:
         return False
 
