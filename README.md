@@ -1,6 +1,6 @@
 # listrot
 
-> **Beta** — v0.1.4. Expect rough edges. Findings should be spot-checked before acting on them. This was authored entirely with AI — review carefully before trusting actions from internet randos.
+> **Archived** — This action doesn't meet my bar for quality and I'm out of ideas so I'm shutting it down before anyone actually consumes it. 
 
 A GitHub Action that audits curated markdown lists for abandoned, unmaintained, or vulnerable entries.
 
